@@ -1,33 +1,50 @@
-# Project
+# Surface API Mananagement Service
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+The Surface API Management Service is a collection of APIs that allow for management of your organization's Surface devices.
 
-As the maintainer of this project, please make a few updates:
+## Obtaining API access
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+Permissions to call the Surface API Manangement Service are provided on an as-needed basis. If you are interested in the API offerings, please email surfaceapims@microsoft.com for onboarding details.
 
-## Contributing
+Please include the following information in your request:
+> * Company name
+> * [Tenant id](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-find-tenant)
+> * Estimated quantity of Intune-registered Surface devices
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+## Making API calls
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+Authentication to the Surface API Management Service is gated by two security checks:
+1. Subscription key
+    - This must be passed in the request headers as `Ocp-Apim-Subscription-Key`
+    - Details on obtaining this key will be provided during the onboarding process noted in the previous section.
+2. Access token
+    - The token must be generated from an Entra application of the tenant that you provided during onboarding.
+    - For instructions on how to create an Entra application and generate a token, see [Create a Microsoft Entra application and service principal that can access resources](https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal).
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+Please see [SurfaceApiManagementServiceSample](./src/SurfaceApiManagementServiceSample/Program.cs) for sample code that sets these headers and sends a request.
 
-## Trademarks
+# APIs
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+## Warranty API
+
+This API provides warranty information for Intune-enrolled Surface devices. Currently, this data is only available in bulk via CSV export.
+
+In order for the data to be available, you must first enroll your tenant for scanning:
+
+> `PUT https://appx-sms-int-apim.azure-api.net/api/external/warranty/enrollment`
+
+Then, twice per month, our services will scan your tenant's devices and a device export will be available export API. Please note that if any devices are added/removed from your tenant or any new warranties are added in between scans, the export data may be out-of-date.
+
+> `GET https://appx-sms-int-apim.azure-api.net/api/external/warranty/export`
+> 
+> Response: 
+> ```
+> {
+>    "downloadUrl": "url to csv download",
+>    "expiresOn": "date/time the downloadUrl will expire on"
+> }
+> ```
+
+Finally, if you wish to unenroll your tenant, you can do so via:
+
+> `DEL https://appx-sms-int-apim.azure-api.net/api/external/warranty/enrollment`
