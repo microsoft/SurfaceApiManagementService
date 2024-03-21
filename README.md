@@ -8,11 +8,12 @@ Permissions to call the Surface API Manangement Service are provided on an as-ne
 
 Please include the following information in your request:
 > * Company name
-> * Directory (tenant) id[^1]
+> * Tenant id[^1]
+> * Tenant primary domain[^1] (ex. contoso.onmicrosoft.com)
 > * Application (client) id[^2]
 > * Estimated quantity of Intune-registered Surface devices
 
-[^1]: See [How to find your Microsoft Entra tenant ID](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-find-tenant).
+[^1]: See [Find the Microsoft Entra tenant ID and primary domain name](https://learn.microsoft.com/en-us/partner-center/find-ids-and-domain-names#find-the-microsoft-entra-tenant-id-and-primary-domain-name).
 [^2]: See [Create a Microsoft Entra application and service principal that can access resources](https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal)
 
 ## Making API calls
