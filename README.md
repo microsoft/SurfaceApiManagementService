@@ -4,62 +4,80 @@ The Surface API Management Service is a collection of APIs that allow for manage
 
 ## Obtaining API access
 
-Permissions to call the Surface API Manangement Service are provided on an as-needed basis. If you are interested in the API offerings, please email surfaceapims@microsoft.com for onboarding details.
+Permissions to call the Surface API Manangement Service are provided on an as-needed basis.
 
-Please include the following information in your request:
+Requirements to access this service:
+1. An active Surface Management Portal Account
+2. Complete customer validation check
+   * If you are not sure, find your customer validation status [here](https://intune.microsoft.com/#view/Microsoft_Azure_Surface/CreateRepairRequestV2.ReactView). If you have access, you will access the flow; if not, complete the customer validation check on the page.
+
+To begin onboarding, make a Customer Support request [here](https://support.serviceshub.microsoft.com/supportforbusiness/create) including these details:
+
+![Support request](./docs/images/css-step1.png)
+![Support request](./docs/images/css-step2.png)
+
+1. Product Family
+   * Surface
+2. What product or service do you need help with?
+   * Hardware Support Portal or Surface Management Portal
+3. Which category best describes the issue?
+   * Other issues
+4. How would you summarize the issue?
+   * "Requesting Access to Surface API Managment Service"
+5. Provide the below information:
 > * Company name
 > * Tenant id[^1]
 > * Tenant primary domain[^1] (ex. contoso.onmicrosoft.com)
 > * Application (client) id[^2]
 > * Estimated quantity of Intune-registered Surface devices
 
-[Image of sample ticket]
-
 [^1]: See [Find the Microsoft Entra tenant ID and primary domain name](https://learn.microsoft.com/en-us/partner-center/find-ids-and-domain-names#find-the-microsoft-entra-tenant-id-and-primary-domain-name).
 [^2]: See [Create a Microsoft Entra application and service principal that can access resources](https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal)
 
-## Developer portal sign in
+# Developer portal
+
+## Sign in
 
 Once you have been added to the access list, you will receive a link to the developer portal to subscribe to the available APIs.
 
-[Image of sign in screen]
+![API Management - Sign in](./docs/images/apim-signin.png)
 
 1. Sign in using the approved Tenant using Azure Active Directory.
-Note: You must sign in using the admin profile for the account.
-2. Complete the Sign up request details
-   * If you recieve this error that account used for logging in has not been added to the access list.
+   - You must sign in using the admin profile for the account.
+2. Complete the Sign up request details.
 
 ## Subscribing to a Product
 
 Once you have logged in, you are able to view the APIs available within a Product. To access and use these APIs, you will need to subscribe to the Product associated to the API.
 
-[Image of product page]
+![API Management - Products](./docs/images/apim-products.png)
 
 1. Select the Product menu to view the products and APIs associated to it.
 2. Once you have identified the product you wish to subscribe to, enter a name in the Subscription text box and hit Subscribe.
-3. This will generate subscription keys available on the Profile screen.
+3. This will generate subscription keys available on the User profile screen.
 
-[Image of profile screen]
-
-## Making API calls
-
-Authentication to the Surface API Management Service is gated by two security checks:
-1. Subscription key
-    - This must be passed in the request headers as `Ocp-Apim-Subscription-Key`
-    - Details on obtaining this key will be provided during the onboarding process noted in the previous section.
-2. Access token
-    - The token must be generated from an Entra application of the tenant that you provided during onboarding.
-    - For instructions on how to create an Entra application and generate a token, see [Create a Microsoft Entra application and service principal that can access resources](https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal).
-
-Please see [SurfaceApiManagementServiceSample](./src/SurfaceApiManagementServiceSample/Program.cs) for sample code that sets these headers and sends a request.
+![API Management - User profile](./docs/images/apim-profile.png)
 
 ## Reports
 
 Once you are actively using APIs you will be able to see reporting metrics and usage data on the reports page.
 
-[Image]
+![API Management Reports](./docs/images/apim-reports.png)
 
 # APIs
+
+## Making API calls and code sample
+
+Authentication to the Surface API Management Service is gated by two security checks:
+1. Subscription key
+   - This must be passed in the request headers as `Ocp-Apim-Subscription-Key`
+   - Subscription key can be retrieved from your user profile, as seen in the previous section.
+2. Access token
+   - The token must be generated from an Entra application of the tenant that you provided during onboarding.
+   - The token scope should be `76bd8628-ca60-441c-9d83-06503cbfd9c5/.default`, where the guid is the app id for Surface API Management Service.
+   - For instructions on how to create an Entra application and generate a token, see [Create a Microsoft Entra application and service principal that can access resources](https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal).
+
+Please see [SurfaceApiManagementServiceSample](./src/SurfaceApiManagementServiceSample/Program.cs) for sample code that sets these headers and sends a request.
 
 ## Warranty API
 
@@ -71,7 +89,9 @@ In order for the data to be available, you must first enroll your tenant for sca
 
 > `PUT https://appx-sms-int-apim.azure-api.net/api/external/warranty/enrollment`
 
-Then, twice per month, our services will scan your tenant's devices and a device export will be available export API. Please note that if any devices are added/removed from your tenant or any new warranties are added in between scans, the export data may be out-of-date.
+Once enrolled, it may take up to 5 business days from onboarding to see your populated data via the `export` API. If you receive a 404 error, please wait and try again in a few days.
+
+After the first scan, our services will refresh your tenant's device information once every month. Please note that if any devices are added/removed from your tenant or any new warranties are added in between scans, the export data may be out-of-date.
 
 > `GET https://appx-sms-int-apim.azure-api.net/api/external/warranty/export`
 >
