@@ -2,7 +2,7 @@
 using System.Net.Http.Headers;
 
 // Surface API Management Service app id
-const string SurfaceApiManagementServiceAppId = "05c8c62b-18c7-4dff-9f65-2812120f06f0";
+const string SurfaceApiManagementServiceAppId = "76bd8628-ca60-441c-9d83-06503cbfd9c5";
 
 // Your tenant and app information
 string tenantId = "<your-tenant-id>";
@@ -22,7 +22,7 @@ HttpRequestMessage request = new HttpRequestMessage();
 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
 request.Headers.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
 request.Method = HttpMethod.Put;
-request.RequestUri = new Uri("https://appx-sms-int-apim.azure-api.net/api/external/warranty/enrollment");
+request.RequestUri = new Uri("https://appx-sms-prod-apim.azure-api.net/api/external/warranty/enrollment");
 
 // Send the request
 using (var client = new HttpClient())
