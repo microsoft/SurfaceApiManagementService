@@ -3,33 +3,28 @@
 The Surface API Management Service is a collection of APIs that allow for management of your organization's Surface devices.
 
 ## Obtaining API access
+Permissions to call the Surface API Manangement Service are provided on an as-needed basis. Access confirmation may take up to 5 business days from the moment you submit your request.​
 
-Permissions to call the Surface API Manangement Service are provided on an as-needed basis.
+Please note that access to the Surface API Management Service will be initially limited to a few customer tenants, but will scale progressively after the first 6 months of operation. We thank you in advance for your patience.
 
-Requirements to access this service:
+### Requirements to access this service
 1. An active Surface Management Portal Account
 2. Complete customer validation check
    * If you are not sure, find your customer validation status [here](https://intune.microsoft.com/#view/Microsoft_Azure_Surface/CreateRepairRequestV2.ReactView). If you have access, you will access the flow; if not, complete the customer validation check on the page.
 
-To begin onboarding, make a Customer Support request [here](https://support.serviceshub.microsoft.com/supportforbusiness/create) including these details:
+### Request onboarding
+To begin onboarding, send an email to surfaceapimanagementsupport@microsoft.com with the following information:
 
-![Support request](./docs/images/css-step1.png)
-![Support request](./docs/images/css-step2.png)
+> Subject: "Requesting Access to Surface API Management Service"
 
-1. Product Family
-   * Surface
-2. What product or service do you need help with?
-   * Hardware Support Portal or Surface Management Portal
-3. Which category best describes the issue?
-   * Other issues
-4. How would you summarize the issue?
-   * "Requesting Access to Surface API Managment Service"
-5. Provide the below information:
+In the body, please provide:
 > * Company name
 > * Tenant id[^1]
 > * Tenant primary domain[^1] (ex. contoso.onmicrosoft.com)
 > * Application (client) id[^2]
 > * Estimated quantity of Intune-registered Surface devices
+
+Upon approval of your request, you will receive a link to the Surface API Management Service Portal which will allow you to subscribe to the available APIs.
 
 [^1]: See [Find the Microsoft Entra tenant ID and primary domain name](https://learn.microsoft.com/en-us/partner-center/find-ids-and-domain-names#find-the-microsoft-entra-tenant-id-and-primary-domain-name).
 [^2]: See [Create a Microsoft Entra application and service principal that can access resources](https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal)
