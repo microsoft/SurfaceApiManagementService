@@ -74,7 +74,7 @@ Authentication to the Surface API Management Service is gated by two security ch
 
 Please see [SurfaceApiManagementServiceSample](./src/SurfaceApiManagementServiceSample/Program.cs) for sample code that sets these headers and sends a request.
 
-## Warranty API
+## Warranty and Coverage API
 
 This API provides warranty information for Intune-enrolled Surface devices. Currently, this data is only available in bulk via CSV export.
 
