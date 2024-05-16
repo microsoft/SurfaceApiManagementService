@@ -86,7 +86,9 @@ In order for the data to be available, you must first enroll your tenant for sca
 
 Once enrolled, it may take up to 5 business days to see your populated data via the `export` API. If you receive a 404 error, please wait and try again in a few days.
 
-After the first scan, our services will refresh your tenant's device information once every month. Please note that if any devices are added/removed from your tenant or any new warranties are added in between scans, the export data may be out-of-date.
+After the first scan, our services will refresh your tenant's device information biweekly. Please note that if any devices are added/removed from your tenant or any new warranties are added in between scans, the export data may be out-of-date.
+
+The data available through this API is the same as what is available through the Surface Management Portal.
 
 > `GET /api/external/warranty/export`
 >
