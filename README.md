@@ -22,7 +22,7 @@ In the body, please provide:
 > * Tenant id[^1]
 > * Tenant primary domain[^1] (ex. contoso.onmicrosoft.com)
 > * Application (client) id[^2]
-> * Estimated quantity of Intune-registered Surface devices
+> * Estimated quantity of Intune-registered Surface devices (minimum: 50)
 
 Upon approval of your request, you will receive a link to the Surface API Management Service Portal which will allow you to subscribe to the available APIs.
 
